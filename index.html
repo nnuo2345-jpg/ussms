@@ -3,227 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABCSMS - 全球跨境云通讯服务商</title>
+    <title>US SMS - 美国实卡接码平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/fonts/noto-sans-sc@latest/styles.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --text-color: #1f2937;
-            --light-bg: #f3f4f6;
+            --primary-color: #e8f5e9;
+            --secondary-color: #c8e6c9;
+            --accent-color: #81c784;
+            --dark-green: #4caf50;
+            --text-color: #2e7d32;
+            --light-text: #f1f8e9;
         }
         
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
         body {
-            color: var(--text-color);
-            background-color: #ffffff;
+            font-family: 'Poppins', 'Noto Sans SC', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
             line-height: 1.6;
         }
-
-        /* 导航栏 */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 4%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-bottom: 1px solid #e5e7eb;
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-color);
-            text-decoration: none;
-            letter-spacing: -0.5px;
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--text-color) !important;
+            font-size: 1.5rem;
         }
-
-        .nav-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-buttons a {
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-size: 14px;
+        
+        .nav-link {
+            color: var(--text-color) !important;
             font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
         }
-
-        .btn-login {
-            color: var(--text-color);
-            margin-right: 10px;
-        }
-
-        .btn-login:hover {
-            color: var(--primary-color);
-        }
-
-        .btn-register {
-            background-color: var(--primary-color);
-            color: white !important;
-        }
-
-        .btn-register:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* 主视觉区 */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 4% 60px 4%;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: #111827;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #4b5563;
-            max-width: 600px;
-            margin: 0 auto 35px auto;
-        }
-
-        .cta-box a {
-            text-decoration: none;
-            display: inline-block;
-            padding: 14px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 8px;
-            background-color: var(--primary-color);
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
             color: white;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-            transition: all 0.2s;
-            cursor: pointer;
         }
-
-        .cta-box a:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-1px);
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
         }
-
-        /* 特性区 */
-        .features {
-            background-color: var(--light-bg);
-            padding: 60px 4%;
+        
+        .btn-outline-primary {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
         }
-
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+        
+        .btn-outline-primary:hover {
+            background-color: var(--accent-color);
+            color: white;
         }
-
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 5rem 0;
+            border-radius: 0 0 20px 20px;
+        }
+        
         .feature-card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--accent-color);
         }
-
-        .feature-card h3 {
-            margin-bottom: 12px;
-            font-size: 20px;
-            color: #111827;
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
         }
-
-        .feature-card p {
-            color: #6b7280;
-            font-size: 14px;
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
         }
-
-        /* 页脚 */
+        
+        .price-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .price-card:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+        }
+        
         footer {
-            text-align: center;
-            padding: 40px 4%;
-            color: #9ca3af;
-            font-size: 14px;
-            border-top: 1px solid #e5e7eb;
+            background-color: var(--text-color);
+            color: white;
         }
-
-        /* 手机端适配 */
+        
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--text-color);
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .how-it-works-step {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 30px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .custom-pointer {
+            cursor: pointer;
+        }
+        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
+            .hero-section {
+                padding: 3rem 0;
+                text-align: center;
+            }
+            
+            .section-title::after {
+                left: 25%;
+                width: 50%;
+            }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <a href="#" class="logo">ABCSMS</a>
-        <div class="nav-buttons">
-            <a onclick="redirectSecure('login')" class="btn-login">登录</a>
-            <a onclick="redirectSecure('register')" class="btn-register">免费注册</a>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-sms me-2"></i>US SMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">功能</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">价格</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">使用指南</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">用户评价</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a onclick="redirectSecure('register')" class="btn btn-primary me-2 custom-pointer">立即注册</a>
+                    <a onclick="redirectSecure('login')" class="btn btn-outline-primary custom-pointer">登录</a>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero">
-        <h1>全球端到端云通讯解决方案</h1>
-        <p>稳定、高效、安全的国际验证码与通知短信服务。助力企业快速拓展海外市场，触达全球 200+ 国家和地区。</p>
-        <div class="cta-box">
-            <a onclick="redirectSecure('register')">立即开始免费试用 &rarr;</a>
+    <section class="hero-section" data-aos="fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">美国实卡接码平台</h1>
+                    <p class="lead mb-4">提供<span class="highlight">真实美国手机号码</span>，支持各类网站和应用的短信验证码接收服务，稳定可靠，隐私安全。</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a onclick="redirectSecure('register')" class="btn btn-primary btn-lg px-4 custom-pointer">免费试用</a>
+                        <a onclick="redirectSecure('register')" class="btn btn-outline-primary btn-lg px-4 custom-pointer">查看价格</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://dummyimage.com/600x400/81c784/ffffff&text=US+SMS+App" alt="US SMS App" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>⚡ 极致高到达率</h3>
-                <p>多路由智能动态路由动态切换，关键验证码 3 秒内必达，综合到达率高达 99%。</p>
+    <section id="features" class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">核心功能</h2>
+                <p class="text-muted">我们提供最全面、最可靠的美国实卡接码服务</p>
             </div>
-            <div class="feature-card">
-                <h3>🌍 全球覆盖</h3>
-                <p>直接对接全球 1000+ 电信运营商网络，支持多语言短信定制与下发。</p>
-            </div>
-            <div class="feature-card">
-                <h3>🛠️ 开发者友好</h3>
-                <p>标准 RESTful API 接口，5分钟即可完成接入。支持高并发，系统稳定无忧。</p>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>真实号码</h4>
+                        <p>所有号码均为美国实体SIM卡号码，非虚拟号，通过率高达99%，完美支持各类平台验证。</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>即时接收</h4>
+                        <p>短信秒级到达，支持自动转发至邮箱或Telegram，历史记录永久保存，随时查阅。</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>隐私保护</h4>
+                        <p>严格的数据加密措施，号码使用后自动销毁，确保您的个人信息绝对安全。</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>多平台支持</h4>
+                        <p>支持Web、iOS、Android多端使用，API接口完善，满足开发者各种集成需求。</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>专属客服</h4>
+                        <p>7×24小时中文客服支持，随时解决您在使用过程中遇到的任何问题。</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h4>号码轮换</h4>
+                        <p>支持自动更换号码功能，避免因频繁使用同一号码导致的验证失败问题。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        &copy; 2026 ABCSMS Cloud Technology. All rights reserved.
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">使用指南</h2>
+                <p class="text-muted">简单三步，轻松获取美国验证码</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="how-it-works-step" data-aos="fade-right">
+                        <div class="step-number">1</div>
+                        <h4>选择号码</h4>
+                        <p>登录后从我们的号码库中选择一个美国号码，支持按运营商、地区筛选，或随机获取一个新号码。</p>
+                    </div>
+                    <div class="how-it-works-step" data-aos="fade-right" data-aos-delay="100">
+                        <div class="step-number">2</div>
+                        <h4>用于验证</h4>
+                        <p>在需要验证的网站或应用上输入您选择的美国号码，系统将自动接收并显示验证码短信。</p>
+                    </div>
+                    <div class="how-it-works-step" data-aos="fade-right" data-aos-delay="200">
+                        <div class="step-number">3</div>
+                        <h4>完成验证</h4>
+                        <p>将接收到的验证码填入目标平台，即可完成验证。号码可保留或立即释放供他人使用。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4" data-aos="fade-up">
+                <a onclick="redirectSecure('register')" class="btn btn-primary btn-lg px-4 custom-pointer">立即开始使用</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">用户评价</h2>
+                <p class="text-muted">听听他们怎么说</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="testimonial-avatar me-3">
+                            <div>
+                                <h5 class="mb-0">张小姐</h5>
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"注册国际电商平台一直是我的难题，自从使用了US SMS，验证过程变得无比简单，号码都是真实的，从来没有失败过。"</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="testimonial-avatar me-3">
+                            <div>
+                                <h5 class="mb-0">李先生</h5>
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"作为开发者，我需要大量美国号码进行测试。US SMS的API接口稳定可靠，客服响应迅速，大大提高了我的工作效率。"</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="testimonial-avatar me-3">
+                            <div>
+                                <h5 class="mb-0">王女士</h5>
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"相比其他接码平台，US SMS的价格更透明，没有隐藏费用。号码质量很高，接收速度快，已经推荐给了我的同事们。"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-5" style="background-color: var(--dark-green); color: white;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="zoom-in">
+                    <h2 class="mb-4">立即注册，获取您的第一个美国号码</h2>
+                    <p class="lead mb-5">新用户注册即送5条免费短信体验，无需绑定信用卡</p>
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <input type="email" class="form-control form-control-lg" placeholder="输入您的邮箱地址">
+                        </div>
+                        <div class="col-md-4">
+                            <a onclick="redirectSecure('register')" class="btn btn-primary btn-lg w-100 custom-pointer">立即注册</a>
+                        </div>
+                    </div>
+                    <p class="mt-3 small">点击注册即表示您同意我们的<a href="#" class="text-white">服务条款</a>和<a href="#" class="text-white">隐私政策</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">常见问题</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item mb-3 border-0 shadow-sm" data-aos="fade-up">
+                            <h3 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    These美国号码是真实的吗？
+                                </button>
+                            </h3>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    是的，我们提供的所有号码均为美国实体SIM卡号码，非虚拟号或VOIP号码，能够通过绝大多数平台的严格验证。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    短信接收速度如何？
+                                </button>
+                            </h3>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    通常情况下，短信会在发送后5-30秒内到达我们的系统并显示在您的账户中。极少数情况下可能会因运营商延迟而需要更长时间。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-4"><i class="fas fa-sms me-2"></i>US SMS</h4>
+                    <p>专业的美国实卡接码服务平台，致力于为用户提供安全、稳定、高效的短信验证码接收解决方案。</p>
+                    <div class="mt-4">
+                        <a onclick="redirectSecure('tg')" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a onclick="redirectSecure('x')" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a onclick="redirectSecure('discord')" class="social-icon"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">产品</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="#features">功能</a></li>
+                        <li class="mb-2"><a href="#pricing">价格</a></li>
+                        <li class="mb-2"><a onclick="redirectSecure('register')">API文档</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">资源</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a onclick="redirectSecure('register')">帮助中心</a></li>
+                        <li class="mb-2"><a onclick="redirectSecure('register')">使用教程</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">公司</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="#">关于我们</a></li>
+                        <li class="mb-2"><a href="#">服务条款</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="text-white mb-4">联系我们</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@ussms.com</li>
+                        <li class="mb-2"><i class="fas fa-comment-alt me-2"></i> Telegram: <a onclick="redirectSecure('tg')" style="color: #81c784; text-decoration: underline;">点击联系</a></li>
+                        <li class="mb-2"><i class="fas fa-clock me-2"></i> 7×24小时</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">© 2026 US SMS. 保留所有权利。</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">接受支付: <i class="fab fa-cc-visa ms-2"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-paypal"></i> <i class="fab fa-bitcoin"></i></p>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
         function redirectSecure(target) {
             try {
-                // Base64 解密字符串：'ZGFwdXRhby5tZQ==' 解密后为 'daputao.me'
-                var base64Domain = "ZGFwdXRhby5tZQ==";
-                var domain = atob(base64Domain);
+                // Base64 编码池，隔绝爬虫对静态文本串的抓取
+                // ZGFwdXRhby5tZQ== => daputao.me
+                // dC5tZS9kYXB1dGFvMDAx => t.me/daputao001
+                var encDomain = "ZGFwdXRhby5tZQ==";
+                var encTg = "dC5tZS9kYXB1dGFvMDAx";
                 
+                var domain = atob(encDomain);
+                var tgLink = atob(encTg);
+
                 if (target === 'login') {
                     window.location.href = "https://" + domain + "/login";
                 } else if (target === 'register') {
                     window.location.href = "https://" + domain + "/register";
+                } else if (target === 'tg') {
+                    window.location.href = "https://" + tgLink;
+                } else if (target === 'x') {
+                    window.location.href = "https://x.com"; // 可替换为你的X营销主页
+                } else if (target === 'discord') {
+                    window.location.href = "https://discord.com";
                 }
             } catch (e) {
-                // 异常降级处理（防止某些极端浏览器不支持 atob）
-                console.error("Navigation error");
+                console.error("Navigation routing error.");
             }
         }
-    </script>
 
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Sticky navbar on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow');
+                navbar.style.padding = '10px 0';
+            } else {
+                navbar.classList.remove('shadow');
+                navbar.style.padding = '20px 0';
+            }
+        });
+    </script>
 </body>
 </html>
